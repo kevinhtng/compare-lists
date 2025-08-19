@@ -1,58 +1,69 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const fileInput = document.getElementById("fileInput");
-  const igModeCheckbox = document.getElementById("igMode");
-  const compareBtn = document.getElementById("compareBtn");
-  const resultsDiv = document.getElementById("results");
+document.addEventListener('DOMContentLoaded', () => {
+  const igCheckbox = document.getElementById('instagramCheckbox');
+  const igFileInput = document.getElementById('igFile');
+  const compareBtn = document.getElementById('compareBtn');
+  const resultDiv = document.getElementById('result');
 
-  fileInput.addEventListener("change", handleFileUpload);
-  compareBtn.addEventListener("click", compareLists);
+  let igUsernames = [];
 
-  function handleFileUpload() {
-    const file = fileInput.files[0];
+  // Auto-enable Instagram checkbox if file detected
+  igFileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
     if (!file) return;
+
+    if (file.name.toLowerCase().includes('followers')) {
+      igCheckbox.checked = true;
+    }
 
     const reader = new FileReader();
     reader.onload = (event) => {
       try {
-        const data = JSON.parse(event.target.result);
-        const usernames = extractInstagramUsernames(data);
-
-        if (usernames.length > 0) {
-          igModeCheckbox.checked = true; // auto-enable
-          document.getElementById("listA").value = usernames.join("\n");
-        }
+        const json = JSON.parse(event.target.result);
+        igUsernames = extractInstagramUsernames(json);
       } catch (err) {
-        alert("Invalid JSON file. Please select a valid Instagram data export.");
+        alert('Invalid JSON file format.');
       }
     };
     reader.readAsText(file);
-  }
+  });
 
-  function extractInstagramUsernames(data) {
-    // Detect if it's IG data and return usernames
-    let usernames = [];
-    if (data && data.relationships_following) {
-      usernames = data.relationships_following.map(item => item.string_list_data[0].value);
-    } else if (Array.isArray(data)) {
-      usernames = data.map(item => item.string_list_data?.[0]?.value).filter(Boolean);
+  compareBtn.addEventListener('click', () => {
+    let listA = document.getElementById('listA').value.split(/\s+/).filter(Boolean);
+    let listB = document.getElementById('listB').value.split(/\s+/).filter(Boolean);
+
+    if (igCheckbox.checked && igUsernames.length > 0) {
+      listA = igUsernames; // Replace List A with Instagram followers
     }
-    return usernames;
-  }
 
-  function compareLists() {
-    const listA = document.getElementById("listA").value.trim().split(/\s+/);
-    const listB = document.getElementById("listB").value.trim().split(/\s+/);
+    const onlyA = listA.filter(x => !listB.includes(x));
+    const onlyB = listB.filter(x => !listA.includes(x));
 
-    const setA = new Set(listA);
-    const setB = new Set(listB);
+    let output = '';
+    if (onlyA.length) {
+      output += 'In A but not B:\n' + onlyA.join('\n') + '\n\n';
+    }
+    if (onlyB.length) {
+      output += 'In B but not A:\n' + onlyB.join('\n') + '\n';
+    }
+    if (!output) {
+      output = 'Both lists match perfectly!';
+    }
 
-    const onlyInA = listA.filter(x => !setB.has(x));
-    const onlyInB = listB.filter(x => !setA.has(x));
+    resultDiv.textContent = output;
+  });
 
-    resultsDiv.innerHTML = `
-      <h3>Results</h3>
-      <p><strong>Only in List A:</strong><br>${onlyInA.join(", ") || "None"}</p>
-      <p><strong>Only in List B:</strong><br>${onlyInB.join(", ") || "None"}</p>
-    `;
+  function extractInstagramUsernames(json) {
+    // Instagram follower JSON usually has "string_list_data" entries
+    const names = [];
+    function search(obj) {
+      if (Array.isArray(obj)) {
+        obj.forEach(search);
+      } else if (typeof obj === 'object' && obj !== null) {
+        if (obj.value) names.push(obj.value);
+        Object.values(obj).forEach(search);
+      }
+    }
+    search(json);
+    return names;
   }
 });
