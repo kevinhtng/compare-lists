@@ -6,7 +6,6 @@ document.getElementById("compareBtn").addEventListener("click", () => {
   const ignoreCase = document.getElementById("ignoreCase").checked;
   const removeDuplicates = document.getElementById("removeDuplicates").checked;
   
-  // normalize items if ignoring case
   const normalize = str => ignoreCase ? str.toLowerCase() : str;
   
   let aItems = listA.map(normalize);
@@ -24,7 +23,6 @@ document.getElementById("compareBtn").addEventListener("click", () => {
   const onlyB = [...setB].filter(x => !setA.has(x));
   const inBoth = [...setA].filter(x => setB.has(x));
 
-  // display results
   document.getElementById("onlyA").textContent = onlyA.join("\n");
   document.getElementById("onlyB").textContent = onlyB.join("\n");
   document.getElementById("inBoth").textContent = inBoth.join("\n");
