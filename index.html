@@ -10,8 +10,20 @@
   <div class="container">
     <h1>Compare Lists</h1>
     <div class="inputs">
-      <textarea id="listA" placeholder="Paste first list here"></textarea>
-      <textarea id="listB" placeholder="Paste second list here"></textarea>
+      <div class="list-box">
+        <div class="title-area">
+          <div class="static-title">List A</div>
+          <input type="text" class="custom-title" placeholder="Optional title for List A">
+        </div>
+        <textarea id="listA" placeholder="Paste first list here"></textarea>
+      </div>
+      <div class="list-box">
+        <div class="title-area">
+          <div class="static-title">List B</div>
+          <input type="text" class="custom-title" placeholder="Optional title for List B">
+        </div>
+        <textarea id="listB" placeholder="Paste second list here"></textarea>
+      </div>
     </div>
     <div class="options">
       <label><input type="checkbox" id="ignoreCase"> Ignore case</label>
