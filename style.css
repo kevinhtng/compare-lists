@@ -1,0 +1,56 @@
+/* compare-lists tool basic styles */
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  width: 50%;
+  height: 200px;
+  padding: 10px;
+  font-family: monospace;
+}
+
+.options {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+.result-box {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
