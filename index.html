@@ -6,11 +6,19 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Clouds floating at the top -->
+  <!-- Clouds -->
   <div class="cloud cloud1"></div>
   <div class="cloud cloud2"></div>
   <div class="cloud cloud3"></div>
   <div class="cloud cloud4"></div>
+
+  <!-- Dark mode toggle -->
+  <div class="dark-mode-toggle">
+    <label>
+      <input type="checkbox" id="darkModeCheckbox">
+      Dark Mode
+    </label>
+  </div>
 
   <!-- Main container -->
   <div class="container">
@@ -36,9 +44,18 @@
       </div>
     </div>
 
-    <button id="compareBtn">Compare</button>
+    <div class="buttons">
+      <button id="compareBtn">Compare</button>
+      <button id="clearBtn">Clear Lists & Results</button>
+    </div>
 
     <div id="result"></div>
+    <div id="timestamp"></div>
+
+    <div id="news-feed">
+      <h2>Investment News</h2>
+      <ul id="newsList"></ul>
+    </div>
   </div>
 
   <footer>
@@ -48,3 +65,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
