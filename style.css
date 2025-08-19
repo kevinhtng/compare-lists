@@ -6,7 +6,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Clouds */
@@ -17,6 +18,7 @@ body {
   opacity: 0.8;
   animation: moveClouds linear infinite;
   top: 30px;
+  z-index: 0;
 }
 .cloud::before,
 .cloud::after {
@@ -26,7 +28,7 @@ body {
   border-radius: 50%;
 }
 
-/* Individual clouds with different sizes and speeds */
+/* Different clouds */
 .cloud1 { width: 120px; height: 60px; left: -150px; animation-duration: 70s; }
 .cloud1::before { width: 60px; height: 60px; top: -20px; left: 30px; }
 .cloud1::after { width: 80px; height: 80px; top: -30px; left: 60px; }
@@ -48,9 +50,9 @@ body {
   100% { transform: translateX(120vw); }
 }
 
-/* Main container */
+/* Main container in middle */
 .container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85); /* slight transparency */
   border-radius: 20px;
   padding: 30px;
   width: 90%;
@@ -59,6 +61,7 @@ body {
   text-align: center;
   position: relative;
   z-index: 1;
+  margin-top: 80px;
 }
 
 /* Headings */
@@ -109,9 +112,15 @@ button:hover { background-color: #3399ff; }
   text-align: left;
 }
 
-/* Footer */
+.result-heading {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+/* Footer at bottom of page */
 footer {
-  margin-top: 30px;
+  margin-top: 40px;
   font-size: 0.9rem;
   color: #333;
 }
