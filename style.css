@@ -21,10 +21,10 @@ body.dark-mode {
   position: absolute;
   background: #fff;
   border-radius: 50%;
-  opacity: 0.8;
+  opacity: 0.4;
   animation: moveClouds linear infinite;
-  top: 30px;
-  z-index: 0;
+  top: 50px;
+  z-index: 0; /* behind container */
 }
 .cloud::before,
 .cloud::after {
@@ -34,20 +34,18 @@ body.dark-mode {
   border-radius: 50%;
 }
 
-/* Clouds variations */
-.cloud1 { width: 120px; height: 60px; left: -150px; animation-duration: 70s; }
+/* Cloud sizes, positions, and layering for depth */
+.cloud1 { width: 150px; height: 70px; left: -200px; animation-duration: 80s; opacity: 0.5; top: 40px; }
+.cloud2 { width: 120px; height: 60px; left: -250px; animation-duration: 100s; opacity: 0.4; top: 80px; }
+.cloud3 { width: 100px; height: 50px; left: -180px; animation-duration: 90s; opacity: 0.35; top: 130px; }
+.cloud4 { width: 180px; height: 90px; left: -300px; animation-duration: 120s; opacity: 0.45; top: 180px; }
+
 .cloud1::before { width: 60px; height: 60px; top: -20px; left: 30px; }
 .cloud1::after { width: 80px; height: 80px; top: -30px; left: 60px; }
-
-.cloud2 { width: 100px; height: 50px; left: -200px; animation-duration: 90s; top: 70px; }
 .cloud2::before { width: 50px; height: 50px; top: -15px; left: 25px; }
 .cloud2::after { width: 70px; height: 70px; top: -25px; left: 50px; }
-
-.cloud3 { width: 80px; height: 40px; left: -180px; animation-duration: 80s; top: 120px; }
 .cloud3::before { width: 40px; height: 40px; top: -10px; left: 20px; }
 .cloud3::after { width: 50px; height: 50px; top: -15px; left: 40px; }
-
-.cloud4 { width: 90px; height: 45px; left: -250px; animation-duration: 100s; top: 160px; }
 .cloud4::before { width: 45px; height: 45px; top: -12px; left: 22px; }
 .cloud4::after { width: 55px; height: 55px; top: -18px; left: 44px; }
 
@@ -184,8 +182,10 @@ body.dark-mode footer { color: #ccc; }
     font-size: 0.95rem; 
   }
   .container { 
-    padding: 20px; 
+    padding: 15px; 
     margin-top: 40px;
+    background: none; /* remove white box on mobile */
+    box-shadow: none;
   }
   button { 
     width: 90%; 
