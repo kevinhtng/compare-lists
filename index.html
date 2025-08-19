@@ -3,49 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compare Lists</title>
-  <link rel="stylesheet" href="style.css">
+  <title>List Comparator</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
-    <h1>Compare Lists</h1>
-    <div class="inputs">
-      <div class="list-box">
-        <div class="title-area">
-          <div class="static-title">List A</div>
-          <input type="text" class="custom-title" placeholder="Optional title for List A">
-        </div>
-        <textarea id="listA" placeholder="Paste first list here"></textarea>
+    <h1>List Comparator</h1>
+
+    <label class="checkbox">
+      <input type="checkbox" id="igMode">
+      Instagram Followers
+    </label>
+
+    <div class="file-upload">
+      <input type="file" id="fileInput" accept=".json">
+      <p>Upload Instagram data file (optional)</p>
+    </div>
+
+    <div class="lists">
+      <div>
+        <h2>List A</h2>
+        <textarea id="listA" placeholder="Paste usernames..."></textarea>
       </div>
-      <div class="list-box">
-        <div class="title-area">
-          <div class="static-title">List B</div>
-          <input type="text" class="custom-title" placeholder="Optional title for List B">
-        </div>
-        <textarea id="listB" placeholder="Paste second list here"></textarea>
+      <div>
+        <h2>List B</h2>
+        <textarea id="listB" placeholder="Paste usernames..."></textarea>
       </div>
     </div>
-    <div class="options">
-      <label><input type="checkbox" id="ignoreCase"> Ignore case</label>
-      <label><input type="checkbox" id="removeDuplicates" checked> Remove duplicates</label>
-    </div>
+
     <button id="compareBtn">Compare</button>
-    <div id="results">
-      <h2>Results</h2>
-      <div class="result-box">
-        <h3>Only in A</h3>
-        <pre id="onlyA"></pre>
-      </div>
-      <div class="result-box">
-        <h3>Only in B</h3>
-        <pre id="onlyB"></pre>
-      </div>
-      <div class="result-box">
-        <h3>In Both</h3>
-        <pre id="inBoth"></pre>
-      </div>
-    </div>
+
+    <div id="results"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
