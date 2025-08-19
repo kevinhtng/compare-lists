@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const onlyB = [...listB].filter(x => !listA.has(x));
     const inBoth = [...listA].filter(x => listB.has(x));
 
-    let output = '';
-    output += `<strong>Only in List A:</strong>\n${onlyA.join(', ') || 'None'}\n\n`;
-    output += `<strong>Only in List B:</strong>\n${onlyB.join(', ') || 'None'}\n\n`;
-    output += `<strong>In Both:</strong>\n${inBoth.join(', ') || 'None'}`;
+    let html = '';
+    html += `<div class="result-heading">Only in A:</div> ${onlyA.join(', ') || 'None'}<br>`;
+    html += `<div class="result-heading">Only in B:</div> ${onlyB.join(', ') || 'None'}<br>`;
+    html += `<div class="result-heading">In Both:</div> ${inBoth.join(', ') || 'None'}`;
 
-    resultDiv.innerHTML = output.replace(/\n/g, '<br>');
+    resultDiv.innerHTML = html;
   });
 
   function extractInstagramUsernames(json) {
