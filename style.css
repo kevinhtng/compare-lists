@@ -1,22 +1,89 @@
-/* General sky theme */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(to top, #87cefa, #e0f7ff);
   min-height: 100vh;
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  position: relative;
 }
 
+/* Cloud animation */
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: moveClouds linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.cloud1 {
+  width: 120px;
+  height: 60px;
+  top: 50px;
+  left: -150px;
+  animation-duration: 70s;
+}
+.cloud1::before {
+  width: 60px;
+  height: 60px;
+  top: -20px;
+  left: 30px;
+}
+.cloud1::after {
+  width: 80px;
+  height: 80px;
+  top: -30px;
+  left: 60px;
+}
+
+.cloud2 {
+  width: 100px;
+  height: 50px;
+  top: 120px;
+  left: -200px;
+  animation-duration: 90s;
+}
+.cloud2::before {
+  width: 50px;
+  height: 50px;
+  top: -15px;
+  left: 25px;
+}
+.cloud2::after {
+  width: 70px;
+  height: 70px;
+  top: -25px;
+  left: 50px;
+}
+
+/* Animation keyframes */
+@keyframes moveClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(120vw); }
+}
+
+/* Container styling */
 .container {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   padding: 30px;
   width: 90%;
   max-width: 800px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Headings */
@@ -44,6 +111,7 @@ h1 {
   justify-content: center;
   gap: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 .list-box {
   flex: 1;
@@ -83,4 +151,3 @@ button:hover {
   white-space: pre-wrap;
   text-align: left;
 }
-
