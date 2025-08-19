@@ -95,11 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Fetch news feed every 5 minutes
   async function fetchNews() {
-    // Example: using free RSS-to-JSON API
     const feeds = [
-      'https://www.marketwatch.com/rss/topstories',   // stock & market
-      'https://www.investopedia.com/feedbuilder/feed/getfeed?category=Investing', // investing
-      'https://www.reuters.com/technology/rss'        // tech
+      'https://www.marketwatch.com/rss/topstories',
+      'https://www.investopedia.com/feedbuilder/feed/getfeed?category=Investing',
+      'https://www.reuters.com/technology/rss'
     ];
 
     newsList.innerHTML = '<li>Loading news...</li>';
