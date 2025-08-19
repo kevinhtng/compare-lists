@@ -2,30 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>List Comparator</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <h1>List Comparator</h1>
 
-    <label class="checkbox">
-      <input type="checkbox" id="igMode">
-      Instagram Followers
-    </label>
-
-    <div class="file-upload">
-      <input type="file" id="fileInput" accept=".json">
-      <p>Upload Instagram data file (optional)</p>
+    <div class="upload-section">
+      <label>
+        <input type="checkbox" id="instagramCheckbox">
+        Instagram Followers
+      </label>
+      <input type="file" id="igFile" accept=".json">
+      <p class="file-label">Upload Instagram data file (optional)</p>
     </div>
 
-    <div class="lists">
-      <div>
+    <div class="lists-section">
+      <div class="list-box">
         <h2>List A</h2>
         <textarea id="listA" placeholder="Paste usernames..."></textarea>
       </div>
-      <div>
+      <div class="list-box">
         <h2>List B</h2>
         <textarea id="listB" placeholder="Paste usernames..."></textarea>
       </div>
@@ -33,7 +31,7 @@
 
     <button id="compareBtn">Compare</button>
 
-    <div id="results"></div>
+    <div id="result"></div>
   </div>
 
   <script src="script.js"></script>
