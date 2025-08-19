@@ -1,3 +1,4 @@
+/* Sky background */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -6,19 +7,17 @@ body {
   overflow-x: hidden;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  position: relative;
 }
 
-/* Cloud animation */
+/* Clouds */
 .cloud {
   position: absolute;
   background: #fff;
   border-radius: 50%;
   opacity: 0.8;
   animation: moveClouds linear infinite;
+  top: 30px;
 }
-
 .cloud::before,
 .cloud::after {
   content: '';
@@ -27,55 +26,31 @@ body {
   border-radius: 50%;
 }
 
-.cloud1 {
-  width: 120px;
-  height: 60px;
-  top: 50px;
-  left: -150px;
-  animation-duration: 70s;
-}
-.cloud1::before {
-  width: 60px;
-  height: 60px;
-  top: -20px;
-  left: 30px;
-}
-.cloud1::after {
-  width: 80px;
-  height: 80px;
-  top: -30px;
-  left: 60px;
-}
+/* Individual clouds with different sizes and speeds */
+.cloud1 { width: 120px; height: 60px; left: -150px; animation-duration: 70s; }
+.cloud1::before { width: 60px; height: 60px; top: -20px; left: 30px; }
+.cloud1::after { width: 80px; height: 80px; top: -30px; left: 60px; }
 
-.cloud2 {
-  width: 100px;
-  height: 50px;
-  top: 120px;
-  left: -200px;
-  animation-duration: 90s;
-}
-.cloud2::before {
-  width: 50px;
-  height: 50px;
-  top: -15px;
-  left: 25px;
-}
-.cloud2::after {
-  width: 70px;
-  height: 70px;
-  top: -25px;
-  left: 50px;
-}
+.cloud2 { width: 100px; height: 50px; left: -200px; animation-duration: 90s; top: 70px; }
+.cloud2::before { width: 50px; height: 50px; top: -15px; left: 25px; }
+.cloud2::after { width: 70px; height: 70px; top: -25px; left: 50px; }
 
-/* Animation keyframes */
+.cloud3 { width: 80px; height: 40px; left: -180px; animation-duration: 80s; top: 120px; }
+.cloud3::before { width: 40px; height: 40px; top: -10px; left: 20px; }
+.cloud3::after { width: 50px; height: 50px; top: -15px; left: 40px; }
+
+.cloud4 { width: 90px; height: 45px; left: -250px; animation-duration: 100s; top: 160px; }
+.cloud4::before { width: 45px; height: 45px; top: -12px; left: 22px; }
+.cloud4::after { width: 55px; height: 55px; top: -18px; left: 44px; }
+
 @keyframes moveClouds {
   0% { transform: translateX(0); }
   100% { transform: translateX(120vw); }
 }
 
-/* Container styling */
+/* Main container */
 .container {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   padding: 30px;
   width: 90%;
@@ -87,25 +62,14 @@ body {
 }
 
 /* Headings */
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 20px;
-}
+h1 { font-size: 2.2rem; margin-bottom: 20px; }
 
 /* Upload section */
-.upload-section {
-  margin-bottom: 20px;
-}
-.upload-section label {
-  font-weight: bold;
-  margin-right: 15px;
-}
-.file-label {
-  font-size: 0.9rem;
-  color: #333;
-}
+.upload-section { margin-bottom: 20px; }
+.upload-section label { font-weight: bold; margin-right: 15px; }
+.file-label { font-size: 0.9rem; color: #333; }
 
-/* Textareas in a grid */
+/* Lists grid */
 .lists-section {
   display: flex;
   justify-content: center;
@@ -113,16 +77,11 @@ h1 {
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
-.list-box {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+.list-box { flex: 1; display: flex; flex-direction: column; align-items: center; }
 textarea {
   width: 100%;
   height: 150px;
-  resize: none;
+  resize: vertical;
   border-radius: 10px;
   border: 1px solid #ccc;
   padding: 10px;
@@ -140,9 +99,7 @@ button {
   cursor: pointer;
   transition: background 0.3s ease;
 }
-button:hover {
-  background-color: #3399ff;
-}
+button:hover { background-color: #3399ff; }
 
 /* Result box */
 #result {
@@ -150,4 +107,11 @@ button:hover {
   font-size: 1rem;
   white-space: pre-wrap;
   text-align: left;
+}
+
+/* Footer */
+footer {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #333;
 }
