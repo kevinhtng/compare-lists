@@ -1,83 +1,86 @@
-/* Sky blue gradient with clouds background */
+/* General sky theme */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(to top, #a0d8ef, #e0f7ff);
+  background: linear-gradient(to top, #87cefa, #e0f7ff);
   min-height: 100vh;
-  background-image: url('https://i.imgur.com/YWbGB5g.png'); /* transparent clouds PNG */
-  background-repeat: repeat-x;
-  background-size: cover;
-  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 40px 20px;
-  background-color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  padding: 30px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  text-align: center;
 }
 
+/* Headings */
 h1 {
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
 }
 
-.checkbox {
-  display: block;
-  margin: 20px 0;
-  font-size: 1.1rem;
+/* Upload section */
+.upload-section {
+  margin-bottom: 20px;
+}
+.upload-section label {
+  font-weight: bold;
+  margin-right: 15px;
+}
+.file-label {
+  font-size: 0.9rem;
+  color: #333;
 }
 
-.file-upload {
-  margin: 15px 0;
-}
-
-.lists {
+/* Textareas in a grid */
+.lists-section {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
+  gap: 20px;
+  margin-bottom: 20px;
 }
-
-.lists div {
+.list-box {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 textarea {
   width: 100%;
-  height: 200px;
-  border: 2px solid #ccc;
+  height: 150px;
+  resize: none;
   border-radius: 10px;
+  border: 1px solid #ccc;
   padding: 10px;
-  resize: vertical;
   font-size: 1rem;
 }
 
+/* Button styling */
 button {
-  margin-top: 25px;
-  padding: 12px 30px;
-  background-color: #007acc;
+  background-color: #4da6ff;
   color: white;
   border: none;
-  border-radius: 30px;
-  font-size: 1.1rem;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background 0.3s ease;
 }
-
 button:hover {
-  background-color: #005fa3;
+  background-color: #3399ff;
 }
 
-#results {
-  margin-top: 30px;
+/* Result box */
+#result {
+  margin-top: 20px;
+  font-size: 1rem;
+  white-space: pre-wrap;
   text-align: left;
-  padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  max-height: 400px;
-  overflow-y: auto;
 }
+
