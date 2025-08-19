@@ -21,8 +21,34 @@ h1 {
   margin-bottom: 10px;
 }
 
-textarea {
+.list-box {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-area {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
+.static-title {
+  background: black;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.custom-title {
+  padding: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+textarea {
+  width: 100%;
   height: 200px;
   padding: 10px;
   font-family: monospace;
@@ -54,3 +80,4 @@ pre {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
