@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const listBInput = document.getElementById('listB');
   const darkModeCheckbox = document.getElementById('darkModeCheckbox');
   const newsList = document.getElementById('newsList');
+  const mqDataDiv = document.getElementById('mqData');
 
   let igUsernames = [];
 
@@ -133,21 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchNews();
   setInterval(fetchNews, 5 * 60 * 1000); // update every 5 minutes
 
-  // --- Magic Quadrant Leaders Dashboard ---
-  function createMQDashboard() {
-    const container = document.querySelector('.container');
-
-    // Create dashboard wrapper
-    const mqSection = document.createElement('div');
-    mqSection.id = 'mq-dashboard';
-    mqSection.innerHTML = `
-      <h2>Magic Quadrant Leaders (Sample)</h2>
-      <div class="mq-grid" id="mqGrid"></div>
-    `;
-    container.appendChild(mqSection);
-
-    // Sample static data (can replace with API later)
-    const mqLeaders = [
+  // --- Magic Quadrant Leaders Section ---
+  function renderMagicQuadrant() {
+    const leaders = [
       { name: 'Microsoft', category: 'Cloud Infrastructure', marketCap: '$3.0T', revenue: '$245B' },
       { name: 'Amazon', category: 'Cloud Infrastructure', marketCap: '$2.0T', revenue: '$574B' },
       { name: 'Google', category: 'Data Analytics', marketCap: '$2.2T', revenue: '$307B' },
@@ -155,19 +144,21 @@ document.addEventListener('DOMContentLoaded', () => {
       { name: 'ServiceNow', category: 'ITSM', marketCap: '$150B', revenue: '$8B' }
     ];
 
-    const mqGrid = document.getElementById('mqGrid');
-    mqLeaders.forEach(leader => {
-      const card = document.createElement('div');
-      card.className = 'mq-card';
-      card.innerHTML = `
-        <h3>${leader.name}</h3>
-        <p><strong>Category:</strong> ${leader.category}</p>
-        <p><strong>Market Cap:</strong> ${leader.marketCap}</p>
-        <p><strong>Revenue:</strong> ${leader.revenue}</p>
-      `;
-      mqGrid.appendChild(card);
+    // Build table
+    let html = '<table class="mq-table">';
+    html += '<thead><tr><th>Company</th><th>Category</th><th>Market Cap</th><th>Revenue</th></tr></thead><tbody>';
+    leaders.forEach(l => {
+      html += `<tr>
+        <td>${l.name}</td>
+        <td>${l.category}</td>
+        <td>${l.marketCap}</td>
+        <td>${l.revenue}</td>
+      </tr>`;
     });
+    html += '</tbody></table>';
+
+    mqDataDiv.innerHTML = html;
   }
 
-  createMQDashboard();
+  renderMagicQuadrant();
 });
