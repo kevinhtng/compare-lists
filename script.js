@@ -132,4 +132,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetchNews();
   setInterval(fetchNews, 5 * 60 * 1000); // update every 5 minutes
+
+  // --- Magic Quadrant Leaders Dashboard ---
+  function createMQDashboard() {
+    const container = document.querySelector('.container');
+
+    // Create dashboard wrapper
+    const mqSection = document.createElement('div');
+    mqSection.id = 'mq-dashboard';
+    mqSection.innerHTML = `
+      <h2>Magic Quadrant Leaders (Sample)</h2>
+      <div class="mq-grid" id="mqGrid"></div>
+    `;
+    container.appendChild(mqSection);
+
+    // Sample static data (can replace with API later)
+    const mqLeaders = [
+      { name: 'Microsoft', category: 'Cloud Infrastructure', marketCap: '$3.0T', revenue: '$245B' },
+      { name: 'Amazon', category: 'Cloud Infrastructure', marketCap: '$2.0T', revenue: '$574B' },
+      { name: 'Google', category: 'Data Analytics', marketCap: '$2.2T', revenue: '$307B' },
+      { name: 'Salesforce', category: 'CRM', marketCap: '$300B', revenue: '$35B' },
+      { name: 'ServiceNow', category: 'ITSM', marketCap: '$150B', revenue: '$8B' }
+    ];
+
+    const mqGrid = document.getElementById('mqGrid');
+    mqLeaders.forEach(leader => {
+      const card = document.createElement('div');
+      card.className = 'mq-card';
+      card.innerHTML = `
+        <h3>${leader.name}</h3>
+        <p><strong>Category:</strong> ${leader.category}</p>
+        <p><strong>Market Cap:</strong> ${leader.marketCap}</p>
+        <p><strong>Revenue:</strong> ${leader.revenue}</p>
+      `;
+      mqGrid.appendChild(card);
+    });
+  }
+
+  createMQDashboard();
 });
