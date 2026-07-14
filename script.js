@@ -51,16 +51,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function extractInstagramUsernames(json) {
-    const names = [];
+    const names = new Set();
     function search(obj) {
-      if (Array.isArray(obj)) obj.forEach(search);
-      else if (typeof obj === 'object' && obj !== null) {
-        if (obj.value) names.push(obj.value);
-        Object.values(obj).forEach(search);
+      if (Array.isArray(obj)) {
+        obj.forEach(search);
+        return;
       }
+      if (typeof obj !== 'object' || obj === null) return;
+
+      // Newer Instagram export format: { title: "username", string_list_data: [...] }
+      if (typeof obj.title === 'string' && Array.isArray(obj.string_list_data)) {
+        names.add(obj.title);
+      }
+
+      // Older Instagram export format: string_list_data items carry "value"
+      if (Array.isArray(obj.string_list_data)) {
+        obj.string_list_data.forEach(item => {
+          if (item && typeof item.value === 'string') names.add(item.value);
+        });
+      }
+
+      Object.values(obj).forEach(search);
     }
     search(json);
-    return names;
+    return [...names];
   }
 
   wireJsonUpload(followingFileInput, followingFileName, listAInput);
