@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const igCheckbox = document.getElementById('instagramCheckbox');
-  const igFileInput = document.getElementById('igFile');
+  const followingFileInput = document.getElementById('followingFileInput');
+  const followersFileInput = document.getElementById('followersFileInput');
+  const followingFileName = document.getElementById('followingFileName');
+  const followersFileName = document.getElementById('followersFileName');
   const compareBtn = document.getElementById('compareBtn');
   const clearBtn = document.getElementById('clearBtn');
   const resultDiv = document.getElementById('result');
@@ -11,8 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const newsList = document.getElementById('newsList');
   const mqDataDiv = document.getElementById('mqData');
 
-  let igUsernames = [];
-
   /* =========================
      Dark Mode Toggle
   ========================== */
@@ -22,25 +22,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* =========================
      Instagram JSON Upload
+     (following.json -> List A, followers.json -> List B,
+      handled as two independent inputs so both can be loaded)
   ========================== */
-  igFileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  function wireJsonUpload(fileInput, fileNameEl, targetTextarea) {
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
 
-    igCheckbox.checked = true;
+      fileNameEl.textContent = file.name;
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      try {
-        const json = JSON.parse(event.target.result);
-        igUsernames = extractInstagramUsernames(json);
-        listAInput.value = igUsernames.join('\n');
-      } catch (err) {
-        alert('Invalid JSON file.');
-      }
-    };
-    reader.readAsText(file);
-  });
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const json = JSON.parse(event.target.result);
+          const usernames = extractInstagramUsernames(json);
+          if (usernames.length === 0) {
+            alert('No usernames found in that file. Make sure it\'s an Instagram followers/following export.');
+            return;
+          }
+          targetTextarea.value = usernames.join('\n');
+        } catch (err) {
+          alert('Invalid JSON file.');
+        }
+      };
+      reader.readAsText(file);
+    });
+  }
 
   function extractInstagramUsernames(json) {
     const names = [];
@@ -54,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
     search(json);
     return names;
   }
+
+  wireJsonUpload(followingFileInput, followingFileName, listAInput);
+  wireJsonUpload(followersFileInput, followersFileName, listBInput);
 
   /* =========================
      Compare Lists
@@ -70,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const inBoth = [...listA].filter(x => listB.has(x));
 
     let html = '';
-    html += `<div class="result-heading">Only in A:</div> ${onlyA.join(', ') || 'None'}<br>`;
-    html += `<div class="result-heading">Only in B:</div> ${onlyB.join(', ') || 'None'}<br>`;
-    html += `<div class="result-heading">In Both:</div> ${inBoth.join(', ') || 'None'}`;
+    html += `<div class="result-heading only-a">Not following back (${onlyA.length})</div>${onlyA.join(', ') || 'Everyone you follow, follows you back.'}<br>`;
+    html += `<div class="result-heading only-b">Fans you don't follow (${onlyB.length})</div>${onlyB.join(', ') || 'None'}<br>`;
+    html += `<div class="result-heading both">Mutual (${inBoth.length})</div>${inBoth.join(', ') || 'None'}`;
 
     resultDiv.innerHTML = html;
     resultDiv.scrollTop = resultDiv.scrollHeight;
@@ -87,8 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
     listBInput.value = '';
     resultDiv.innerHTML = '';
     timestampDiv.textContent = '';
-    igFileInput.value = '';
-    igCheckbox.checked = false;
+    followingFileInput.value = '';
+    followersFileInput.value = '';
+    followingFileName.textContent = 'No file selected';
+    followersFileName.textContent = 'No file selected';
   });
 
   document.addEventListener('keydown', (e) => {
@@ -162,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.createElement('button');
     btn.id = 'mqRefreshBtn';
     btn.textContent = 'Refresh Leaders';
-    btn.style.marginTop = '10px';
+    btn.style.marginBottom = '14px';
     btn.addEventListener('click', () => loadMagicQuadrant(true));
     const h2 = wrapper.querySelector('h2');
     if (h2 && !wrapper.querySelector('#mqRefreshBtn')) h2.insertAdjacentElement('afterend', btn);
@@ -295,7 +308,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>Category:</strong> ${it.categoryGuess}</p>
         <p><strong>Post:</strong> <a href="${it.link}" target="_blank" rel="noopener noreferrer">${escapeHtml(it.title)}</a></p>
         <p><strong>Date:</strong> ${dateStr}</p>
-        <hr style="border:none;border-top:1px solid ${document.body.classList.contains('dark-mode') ? '#555' : '#eee'};margin:8px 0;">
         <p><strong>Ticker:</strong> ${it.ticker || '—'}</p>
         <p><strong>Market Cap:</strong> ${humanMarketCap(f.marketCap)}</p>
         <p><strong>Price:</strong> ${f.price ? `$${fmt(f.price)}` : '—'} &nbsp; <strong>P/E:</strong> ${f.pe ? fmt(f.pe) : '—'}</p>
