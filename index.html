@@ -5,68 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Compare Lists</title>
   <link rel="icon" type="image/png" href="sushi.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Clouds -->
-  <div class="cloud cloud1"></div>
-  <div class="cloud cloud2"></div>
-  <div class="cloud cloud3"></div>
-  <div class="cloud cloud4"></div>
 
-  <!-- Dark mode toggle -->
-  <div class="dark-mode-toggle">
-    <label>
+  <div class="top-bar">
+    <span class="eyebrow">list utility</span>
+    <label class="dark-toggle">
       <input type="checkbox" id="darkModeCheckbox">
-      Dark Mode
+      <span class="dark-toggle-track"><span class="dark-toggle-thumb"></span></span>
+      <span class="dark-toggle-label">Dark</span>
     </label>
   </div>
 
-  <!-- Main container -->
-  <div class="container">
-    <h1>Compare Lists</h1>
+  <main class="container">
+    <header class="page-head">
+      <h1>Compare Lists</h1>
+      <p class="subhead">Upload two Instagram export files, or paste any two lists, to see who's only on one side.</p>
+    </header>
 
-    <div class="upload-section">
-      <label>
-        <input type="checkbox" id="instagramCheckbox">
-        Instagram Followers
-      </label>
-      <input type="file" id="igFile" accept=".json">
-      <p class="file-label">Upload Instagram data file (optional)</p>
-    </div>
+    <section class="lists-section">
+      <div class="list-box">
+        <div class="list-box-head">
+          <h2>Following</h2>
+          <p class="list-hint">People you follow</p>
+        </div>
+        <label class="upload-btn">
+          <input type="file" id="followingFileInput" accept=".json">
+          Upload following.json
+        </label>
+        <span class="file-name" id="followingFileName">No file selected</span>
+        <textarea id="listA" placeholder="…or paste usernames here, one per line"></textarea>
+      </div>
 
-    <div class="lists-section">
-      <div class="list-box">
-        <h2>List A</h2>
-        <textarea id="listA" placeholder="Paste data..."></textarea>
+      <div class="diff-glyph" aria-hidden="true">
+        <svg viewBox="0 0 60 60" width="40" height="40">
+          <circle cx="24" cy="30" r="16" class="glyph-circle glyph-a"/>
+          <circle cx="36" cy="30" r="16" class="glyph-circle glyph-b"/>
+        </svg>
       </div>
+
       <div class="list-box">
-        <h2>List B</h2>
-        <textarea id="listB" placeholder="Paste data..."></textarea>
+        <div class="list-box-head">
+          <h2>Followers</h2>
+          <p class="list-hint">People who follow you</p>
+        </div>
+        <label class="upload-btn">
+          <input type="file" id="followersFileInput" accept=".json">
+          Upload followers.json
+        </label>
+        <span class="file-name" id="followersFileName">No file selected</span>
+        <textarea id="listB" placeholder="…or paste usernames here, one per line"></textarea>
       </div>
-    </div>
+    </section>
 
     <div class="buttons">
       <button id="compareBtn">Compare</button>
-      <button id="clearBtn">Clear Lists & Results</button>
+      <button id="clearBtn" class="secondary">Clear</button>
     </div>
 
     <div id="result"></div>
     <div id="timestamp"></div>
 
-    <div id="news-feed">
+    <section id="news-feed">
       <h2>Investment News</h2>
       <ul id="newsList"></ul>
-    </div>
+    </section>
 
-    <!-- New section for Gartner Magic Quadrant Leaders -->
-    <div id="mq-dashboard">
+    <section id="mq-dashboard">
       <h2>Gartner Magic Quadrant Leaders (2025)</h2>
-      <div id="mqData">
-        <!-- JS will inject a table or cards here -->
-      </div>
-    </div>
-  </div>
+      <div id="mqData"></div>
+    </section>
+  </main>
 
   <footer>
     © 2025 Kevin Hoang Nguyen
